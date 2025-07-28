@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    // Базовые Quarkus зависимости
+    implementation 'io.quarkus:quarkus-arc' // CDI контейнер для dependency injection
+    implementation 'io.quarkus:quarkus-rest' // RESTEasy Reactive для REST API endpoints
+
+    // База данных и JPA
+    implementation 'io.quarkus:quarkus-hibernate-orm' // Hibernate ORM для работы с JPA сущностями
+    implementation 'io.quarkus:quarkus-jdbc-h2' // JDBC драйвер для H2 базы данных
+    implementation 'io.quarkus:quarkus-hibernate-orm-panache' // Panache для упрощения работы с репозиториями
+
+    // JSON обработка для сериализации/десериализации JSON в REST API
+    implementation 'io.quarkus:quarkus-rest-jackson'
+
+    // CSV парсинг
+    implementation 'com.opencsv:opencsv:5.9'
+
+    // Валидация
+    implementation 'io.quarkus:quarkus-hibernate-validator' // Bean Validation для валидации входящих данных
+
+    // Lombok для минимизации шаблонного кода
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Поддержка YAML конфигурации как альтернатива properties
+    implementation 'io.quarkus:quarkus-config-yaml'
+
+    // Тестирование
+    testImplementation 'io.quarkus:quarkus-junit5' // JUnit 5 интеграция для Quarkus
+    testImplementation 'io.quarkus:quarkus-test-h2' // H2 конфигурация специально для тестов
+    testImplementation 'io.rest-assured:rest-assured' // REST Assured для тестирования REST API endpoints
+    testImplementation 'org.assertj:assertj-core:3.24.2' // AssertJ для более читаемых assertion'ов в тестах
+}
+
+group 'dev.nexonm'
+version '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
