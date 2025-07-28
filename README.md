@@ -17,8 +17,8 @@ Record) — детальных записей о телефонных звонк
 
 1. Клонируйте репозиторий:
    ```sh
-   git clone <repo-url>
-   cd mts-task
+   git clone https://github.com/Nexonm/MTS-Test-Task.git
+   cd MTS-Test-Task
    ```
 2. Запустите приложение:
    ```sh
@@ -29,7 +29,7 @@ Record) — детальных записей о телефонных звонк
 ## Структура проекта
 
 ```
-mts-task/
+MTS-Test-Task/
 ├── build.gradle           # Конфигурация Gradle
 ├── gradle.properties      # Свойства сборки
 ├── settings.gradle        # Настройки Gradle
